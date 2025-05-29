@@ -1,39 +1,62 @@
+// 플러그인 설정: 프로젝트에 필요한 Gradle 플러그인을 정의
 plugins {
+	// Java 프로젝트를 지원하는 기본 플러그인
 	id 'java'
+	// Spring Boot 프로젝트를 지원하는 플러그인 (버전 3.5.0 사용)
 	id 'org.springframework.boot' version '3.5.0'
+	// Spring의 의존성 관리를 위한 플러그인 (버전 1.1.7 사용)
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
+// 프로젝트의 그룹 ID 설정 (프로젝트 소속 조직/패키지 구조 정의)
 group = 'jpabook'
+// 프로젝트 버전 설정 (프로젝트의 버전, 일반적으로 SNAPSHOT은 개발 중임을 나타냄)
 version = '0.0.1-SNAPSHOT'
 
+// Java 설정: 프로젝트에서 사용할 Java 버전과 툴체인을 정의
 java {
 	toolchain {
+		// Java 17을 사용하도록 설정
 		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
 
+// 컴파일 전용 의존성 설정: 컴파일 시 필요한 의존성을 정의
 configurations {
 	compileOnly {
+		// annotationProcessor 설정을 상속하여 Lombok과 같은 어노테이션 프로세서를 포함
 		extendsFrom annotationProcessor
 	}
 }
 
+// 의존성 저장소 설정: 라이브러리를 다운로드할 저장소 정의
 repositories {
+	// Maven Central 저장소에서 의존성을 가져옴
 	mavenCentral()
 }
 
+// 프로젝트 의존성 설정: 빌드와 실행에 필요한 라이브러리 정의
 dependencies {
+	// Spring Boot의 JPA 스타터: 데이터베이스 액세스와 ORM(JPA) 기능을 제공
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// Spring Boot의 Thymeleaf 스타터: 서버 측 템플릿 엔진을 위한 의존성
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// Spring Boot의 웹 스타터: 웹 애플리케이션 개발을 위한 기본 의존성 (Spring MVC 포함)
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// Lombok: 컴파일 시 코드 자동 생성 (예: Getter, Setter) - 컴파일 전용
 	compileOnly 'org.projectlombok:lombok'
+	// H2 데이터베이스: 인메모리 데이터베이스, 런타임에만 사용
 	runtimeOnly 'com.h2database:h2'
+	// Lombok 어노테이션 프로세서: 컴파일 시 Lombok 어노테이션 처리
 	annotationProcessor 'org.projectlombok:lombok'
+	// 테스트용 Spring Boot 스타터: 테스트 프레임워크와 유틸리티 제공
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// JUnit 플랫폼 런처: 테스트 실행을 위한 런타임 의존성
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
+// 테스트 작업 설정: 테스트 실행 방식을 정의
 tasks.named('test') {
+	// JUnit 플랫폼을 사용하여 테스트 실행
 	useJUnitPlatform()
 }
