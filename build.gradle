@@ -46,6 +46,7 @@ dependencies {
 
 	// 추가
 	implementation 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
 	// Lombok: 컴파일 시 코드 자동 생성 (예: Getter, Setter) - 컴파일 전용
 	compileOnly 'org.projectlombok:lombok'
